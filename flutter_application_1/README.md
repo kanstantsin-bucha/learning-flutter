@@ -1,6 +1,19 @@
 # flutter_application_1
 
-A new Flutter project.
+I am following implemetation of the video 
+
+youtube: https://youtu.be/D4nhaszNW4o?t=447
+
+example repository: https://github.com/mahdinazmi/Flutter-Basics
+
+## KnowHow
+
+* To update resources use terminal
+```bash 
+flutter pub get
+```
+
+* To see run errors look at DEBUG CONSOLE.
 
 ## Getting Started
 
