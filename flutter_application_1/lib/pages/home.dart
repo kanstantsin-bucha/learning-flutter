@@ -8,7 +8,33 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: createAppBar(),
+      body: createSearchField()
     );
+  }
+
+  Column createSearchField() {
+    return Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
+            decoration: const BoxDecoration(
+              boxShadow: [
+                 BoxShadow(
+                color: Color(0x201D1617),
+                blurRadius: 40,
+                spreadRadius: 0.0
+              )
+              ]
+            ),
+            child: const TextField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white
+              ),
+            ),
+          )
+        ],
+      );
   }
 
   AppBar createAppBar() {
