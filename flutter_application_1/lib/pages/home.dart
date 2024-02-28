@@ -6,10 +6,40 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: createAppBar(), body: createSearchField());
+    return Scaffold(
+      appBar: createAppBar(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [searchField(), categoriesSection()],
+      ),
+    );
   }
 
-  Column createSearchField() {
+  Column categoriesSection() {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 40,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Text(
+            'Category',
+            style: TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
+        SizedBox(height: 15,),
+        SizedBox(
+          height: 150,
+          child: Text(''),
+        )
+      ],
+    );
+  }
+
+  Column searchField() {
     return Column(
       children: [
         Container(
@@ -24,7 +54,7 @@ class HomePage extends StatelessWidget {
                 fillColor: Colors.white,
                 contentPadding: const EdgeInsets.all(15),
                 hintText: 'Search Pancake',
-                hintStyle: const  TextStyle(
+                hintStyle: const TextStyle(
                   color: Colors.grey,
                 ),
                 prefixIcon: searchMagnifierIcon(),
