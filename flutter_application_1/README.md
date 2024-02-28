@@ -13,10 +13,15 @@ example repository: https://github.com/mahdinazmi/Flutter-Basics
 flutter pub get
 ```
 
-* TODO: Avoid `IntrinsicHeight` by any means (High Priority)
+* We use more strict custom linter rules in the [`analysis_options.yml`](./analysis_options.yaml) https://dart.dev/tools/linter-rules
+
+* TODO: Avoid `IntrinsicHeight` by any means **(High Priority)**
 https://stackoverflow.com/questions/57328378/what-is-the-alternative-to-intrinsicheight-in-flutter
 
-* Use `SizeBox` instead on `Container` (Low Priority)
+* Remember to use Trailing commas **(Normal Priority)**
+https://docs.flutter.dev/tools/formatting
+
+* Use `SizeBox` instead on `Container` **(Low Priority)**
 
 * To see run errors look at DEBUG CONSOLE.
 
