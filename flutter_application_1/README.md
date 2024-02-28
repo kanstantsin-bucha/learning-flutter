@@ -1,4 +1,4 @@
-# flutter_application_1
+# flutter_application_1 (tag: app-1)
 
 I am following implemetation of the video 
 
@@ -12,6 +12,11 @@ example repository: https://github.com/mahdinazmi/Flutter-Basics
 ```bash 
 flutter pub get
 ```
+
+* TODO: Avoid `IntrinsicHeight` by any means (High Priority)
+https://stackoverflow.com/questions/57328378/what-is-the-alternative-to-intrinsicheight-in-flutter
+
+* Use `SizeBox` instead on `Container` (Low Priority)
 
 * To see run errors look at DEBUG CONSOLE.
 
