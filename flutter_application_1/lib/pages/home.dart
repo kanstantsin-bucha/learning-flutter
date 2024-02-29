@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/category_model.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  List<CategoryModel> categories = [];
+
+  void _getCategories() {
+    categories = CategoryModel.getCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _getCategories();
     return Scaffold(
       appBar: createAppBar(),
       body: Column(
@@ -16,13 +24,13 @@ class HomePage extends StatelessWidget {
   }
 
   Column categoriesSection() {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 40,
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(left: 20),
           child: Text(
             'Category',
@@ -30,12 +38,58 @@ class HomePage extends StatelessWidget {
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
           ),
         ),
-        SizedBox(height: 15,),
+        const SizedBox(
+          height: 15,
+        ),
         SizedBox(
-          height: 150,
-          child: Text(''),
-        )
+          height: 120,
+          child: ListView.separated(
+              itemCount: categories.length,
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              separatorBuilder: (context, index) => const SizedBox(
+                    width: 25,
+                  ),
+              itemBuilder: (context, index) {
+                return categoryBox(categories[index]);
+              }),
+        ),
       ],
+    );
+  }
+
+  Container categoryBox(CategoryModel category) {
+    return Container(
+      width: 100,
+      decoration: BoxDecoration(
+        color: category.boxColor.withOpacity(0.6),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: SvgPicture.asset(category.iconPath),
+            ),
+          ),
+          Text(
+            category.name,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
+              fontSize: 14
+            )
+          )
+        ],
+      ),
     );
   }
 
