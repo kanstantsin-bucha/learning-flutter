@@ -1,35 +1,137 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/category_model.dart';
+import 'package:flutter_application_1/models/diet_model.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   List<CategoryModel> categories = [];
+  List<DietModel> diets = [];
 
-  void _getCategories() {
+  void _getInitialInfo() {
     categories = CategoryModel.getCategories();
+    diets = DietModel.getDiets();
   }
 
   @override
   Widget build(BuildContext context) {
-    _getCategories();
+    _getInitialInfo();
     return Scaffold(
       appBar: createAppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [searchField(), categoriesSection()],
+        children: [
+          searchField(),
+          const SizedBox(
+            height: 40,
+          ),
+          categoriesSection(),
+          const SizedBox(
+            height: 40,
+          ),
+          dietsSection(),
+        ],
       ),
     );
+  }
+
+  Column dietsSection() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      const Padding(
+        padding: EdgeInsets.only(left: 20),
+        child: Text(
+          'Recommendation\nfor Diet',
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+      ),
+      const SizedBox(
+        height: 15,
+      ),
+      SizedBox(
+        height: 240,
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return dietBox(diets[index]);
+          },
+          separatorBuilder: (context, index) => const SizedBox(
+            width: 25,
+          ),
+          itemCount: diets.length,
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.only(left: 20, right: 20),
+        ),
+      )
+    ]);
+  }
+
+  Container dietBox(DietModel diet) {
+    return Container(
+      width: 210,
+      decoration: BoxDecoration(
+        color: diet.boxColor.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SvgPicture.asset(diet.iconPath),
+          Text(
+            diet.name,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+          Text(
+            '${diet.level} | ${diet.duration} | ${diet.calorie}',
+            style: const TextStyle(
+              fontWeight: FontWeight.w300,
+              color: Color(0xFF7B6F72),
+              fontSize: 13,
+            ),
+          ),
+          Container(
+            width: 130,
+            height: 45,
+            decoration: BoxDecoration(
+                gradient: gradient(diet),
+                borderRadius: BorderRadius.circular(50)),
+            child: Center(
+              child: Text(
+                'View',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: diet.isSelected ? Colors.white : Colors.black38,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  LinearGradient gradient(DietModel diet) {
+    return diet.isSelected
+        ? const LinearGradient(colors: [
+              Color(0xFF9DCEFF),
+              Color(0xFF92A3FD),
+            
+            ],)
+        : const LinearGradient(colors: [
+          Colors.transparent,
+          Colors.transparent,
+        ]);
   }
 
   Column categoriesSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 40,
-        ),
         const Padding(
           padding: EdgeInsets.only(left: 20),
           child: Text(
@@ -80,14 +182,11 @@ class HomePage extends StatelessWidget {
               child: SvgPicture.asset(category.iconPath),
             ),
           ),
-          Text(
-            category.name,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              color: Colors.black,
-              fontSize: 14
-            )
-          )
+          Text(category.name,
+              style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  fontSize: 14))
         ],
       ),
     );
