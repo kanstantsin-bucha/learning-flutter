@@ -25,6 +25,11 @@ https://docs.flutter.dev/tools/formatting
 
 * To see run errors look at DEBUG CONSOLE.
 
+## TODO
+
+- [ ] Popular section
+- Ask how we handle cases when we have and do not have a gradient depending on selection. because we shose the initilizer that has a gradient property, we kinda should provide it... the code looks not clear in that case.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
